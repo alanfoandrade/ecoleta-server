@@ -1,5 +1,4 @@
 import { injectable, inject } from 'tsyringe';
-
 import AppError from '../../../shared/errors/AppError';
 
 import Point from '../infra/typeorm/entities/Point';
@@ -13,7 +12,8 @@ interface IRequest {
   longitude: number;
   city: string;
   uf: string;
-  items: string[];
+  image: string;
+  items: string;
 }
 
 @injectable()
@@ -32,11 +32,13 @@ class CreatePointsService {
       throw new AppError('Email address already used.', 400);
     }
 
-    const pointItems = pointData.items.map((item_id) => ({ item_id }));
+    const pointItems = pointData.items
+      .split(',')
+      .map((item_id) => item_id.trim())
+      .map((item_id) => ({ item_id }));
 
     const point = await this.pointsRepository.create({
       ...pointData,
-      image: 'default-image.svg',
       point_items: pointItems,
     });
 

@@ -32,11 +32,11 @@ export default class CreatePoints1594853540254 implements MigrationInterface {
           },
           {
             name: 'latitude',
-            type: 'decimal',
+            type: 'real',
           },
           {
             name: 'longitude',
-            type: 'decimal',
+            type: 'real',
           },
           {
             name: 'city',

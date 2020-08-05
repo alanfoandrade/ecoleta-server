@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-
 import { container } from 'tsyringe';
 import { classToClass } from 'class-transformer';
 
@@ -25,7 +24,7 @@ export default class PointsController {
 
     const points = await listPoints.execute(filtersObject);
 
-    return response.json(points);
+    return response.json(classToClass(points));
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
@@ -40,6 +39,8 @@ export default class PointsController {
       items,
     } = request.body;
 
+    const image = request.file.filename;
+
     const createPoint = container.resolve(CreatePointService);
 
     const point = await createPoint.execute({
@@ -50,6 +51,7 @@ export default class PointsController {
       longitude,
       city,
       uf,
+      image,
       items,
     });
 
@@ -63,6 +65,6 @@ export default class PointsController {
 
     const point = await showPoint.execute(id);
 
-    return response.json(point);
+    return response.json(classToClass(point));
   }
 }

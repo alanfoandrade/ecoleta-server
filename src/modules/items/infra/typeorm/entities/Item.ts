@@ -29,7 +29,7 @@ class Item {
       return null;
     }
 
-    return `http://localhost:3333/uploads/${this.image}`;
+    return `http://192.168.0.3:3333/uploads/${this.image}`;
   }
 
   @Exclude()

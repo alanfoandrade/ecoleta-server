@@ -26,10 +26,10 @@ class Point {
   @Column('varchar')
   image: string;
 
-  @Column('decimal')
+  @Column('real')
   latitude: number;
 
-  @Column('decimal')
+  @Column('real')
   longitude: number;
 
   @Column('varchar')
@@ -50,7 +50,7 @@ class Point {
       return null;
     }
 
-    return `http://localhost:3333/uploads/${this.image}`;
+    return `http://192.168.0.3:3333/uploads/${this.image}`;
   }
 
   @CreateDateColumn()
